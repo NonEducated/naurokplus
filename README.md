@@ -66,7 +66,7 @@ Firefox підтримує тимчасове завантаження розш�
 
 Відкрий Firefox і перейди за адресою:
 ```
-about:debugging
+about:debugging#/runtime/this-firefox
 ```
 
 **4. Перейди до This Firefox**
