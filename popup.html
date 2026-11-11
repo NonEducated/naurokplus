@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Naurok+</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0A0A0A;--sur:#131313;--sur2:#181818;--brd:#242424;--txt:#F0F0F0;--mut:#565656;--mut2:#3A3A3A;--tof:#1E1E1E;--ton:#EFEFEF;--thf:#484848;--thn:#0A0A0A;--sep:#181818;--r:5px;}
+html,body{width:320px;background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--txt);font-size:13px;line-height:1;-webkit-font-smoothing:antialiased;overflow:hidden;}
+#intro{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;pointer-events:none;}
+#intro.done{animation:iFade .3s ease forwards;}
+@keyframes iFade{to{opacity:0;visibility:hidden;}}
+.il{display:flex;align-items:baseline;gap:4px;opacity:0;transform:translateY(6px);animation:iRise .4s cubic-bezier(.22,.68,0,1.2) .05s forwards;}
+@keyframes iRise{to{opacity:1;transform:translateY(0);}}
+.in{font-size:28px;font-weight:600;color:var(--txt);letter-spacing:-.5px;}
+.ip{font-size:16px;font-weight:400;color:var(--mut);opacity:0;animation:iPls .3s ease .35s forwards;}
+@keyframes iPls{to{opacity:1;}}
+#app{opacity:0;animation:aRev .25s ease .62s forwards;}
+@keyframes aRev{to{opacity:1;}}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;border-bottom:1px solid var(--sep);}
+.logo{display:flex;align-items:baseline;gap:4px;}
+.ln{font-size:14px;font-weight:600;letter-spacing:-.3px;color:var(--txt);}
+.lp{font-size:11px;font-weight:400;color:var(--mut);}
+.spl{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mut);}
+.sd{width:5px;height:5px;border-radius:50%;background:var(--mut2);flex-shrink:0;transition:background .3s;}
+.sd.on{background:#D0D0D0;}
+.tabs{display:flex;border-bottom:1px solid var(--sep);}
+.tab{flex:1;padding:9px 0;font-size:11px;font-weight:500;color:var(--mut);text-align:center;cursor:pointer;border:none;background:none;font-family:inherit;position:relative;transition:color .15s;}
+.tab:hover{color:var(--txt);}
+.tab.a{color:var(--txt);}
+.tab.a::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:1px;background:var(--txt);}
+.pnl{display:none;}
+.pnl.a{display:block;}
+.slbl{padding:10px 16px 6px;font-size:10px;font-weight:500;color:var(--mut);letter-spacing:.5px;}
+.row{display:flex;align-items:center;padding:10px 16px;cursor:pointer;transition:background .1s;gap:12px;}
+.row:hover{background:var(--sur);}
+.row:active{background:var(--sur2);}
+.rt{flex:1;min-width:0;}
+.rl{font-size:12.5px;font-weight:400;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rd{font-size:10.5px;color:var(--mut);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tgl{position:relative;width:34px;height:19px;flex-shrink:0;}
+.tgl input{opacity:0;width:0;height:0;position:absolute;}
+.sl{position:absolute;inset:0;background:var(--tof);border-radius:20px;border:1px solid var(--brd);transition:background .2s,border-color .2s;cursor:pointer;}
+.sl::before{content:'';position:absolute;width:13px;height:13px;left:2px;top:50%;transform:translateY(-50%);background:var(--thf);border-radius:50%;transition:transform .2s cubic-bezier(.4,0,.2,1),background .2s;}
+.tgl input:checked+.sl{background:var(--ton);border-color:var(--ton);}
+.tgl input:checked+.sl::before{transform:translateY(-50%) translateX(15px);background:var(--thn);}
+.tgl input:focus-visible+.sl{outline:2px solid #888;outline-offset:2px;}
+.sep{height:1px;background:var(--sep);margin:1px 0;}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;gap:12px;}
+.sl2{font-size:12.5px;color:var(--txt);}
+.lsel{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);color:var(--txt);font-family:inherit;font-size:12px;padding:5px 8px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23565656'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px;min-width:110px;}
+.lsel:focus{border-color:#444;}
+.brst{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);color:var(--mut);font-family:inherit;font-size:12px;padding:5px 12px;cursor:pointer;transition:color .15s,border-color .15s;min-width:70px;}
+.brst:hover{color:var(--txt);border-color:#444;}
+.sinf{padding:11px 16px;font-size:11px;color:var(--mut);display:flex;justify-content:space-between;}
+.ftr{padding:10px 16px;border-top:1px solid var(--sep);display:flex;align-items:center;justify-content:space-between;}
+.fn{font-size:10px;color:var(--mut);}
+.bal{font-size:11px;font-weight:500;color:var(--mut);background:none;border:1px solid var(--brd);border-radius:var(--r);padding:4px 10px;cursor:pointer;transition:color .15s,border-color .15s;font-family:inherit;}
+.bal:hover{color:var(--txt);border-color:#444;}
+.bcpy{width:calc(100% - 32px);margin:10px 16px 4px;padding:8px 0;background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);color:var(--mut);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;transition:color .15s,border-color .15s,background .15s;letter-spacing:.1px;}
+.bcpy:hover{color:var(--txt);border-color:#444;background:var(--sur2);}
+.bcpy:active{background:#1f1f1f;}
+@keyframes rFi{from{opacity:0;transform:translateX(-4px);}to{opacity:1;transform:translateX(0);}}
+.pnl.a .row,.pnl.a .sr,.pnl.a .slbl{animation:rFi .18s ease both;}
+.pnl.a .row:nth-child(1),.pnl.a .slbl:nth-child(1){animation-delay:.00s;}
+.pnl.a .row:nth-child(2){animation-delay:.03s;}
+.pnl.a .row:nth-child(3){animation-delay:.06s;}
+.pnl.a .row:nth-child(4){animation-delay:.09s;}
+.pnl.a .row:nth-child(5){animation-delay:.12s;}
+.pnl.a .row:nth-child(6){animation-delay:.15s;}
+.pnl.a .row:nth-child(7){animation-delay:.18s;}
+.pnl.a .sr:nth-child(1){animation-delay:.00s;}
+.pnl.a .sr:nth-child(2){animation-delay:.04s;}
+.pnl.a .sr:nth-child(3){animation-delay:.08s;}
+</style>
+</head>
+<body>
+<div id="intro"><div class="il"><span class="in">Naurok</span><span class="ip">+</span></div></div>
+<div id="app">
+  <div class="hdr">
+    <div class="logo"><span class="ln">Naurok</span><span class="lp">+</span></div>
+    <div class="spl"><span class="sd" id="sd"></span><span id="st">—</span></div>
+  </div>
+  <div class="tabs">
+    <button class="tab a" id="tabMain" data-tab="main">Protection</button>
+    <button class="tab" id="tabSettings" data-tab="settings">Settings</button>
+  </div>
+  <div class="pnl a" id="panelMain">
+    <div class="slbl" data-i18n="secFs">Fullscreen</div>
+    <label class="row" for="t0"><div class="rt"><div class="rl" data-i18n="lFs">Block fullscreen</div><div class="rd" data-i18n="dFs">Fakes fullscreen state, intercepts requests</div></div><div class="tgl"><input type="checkbox" id="t0" data-key="blockFullscreen"><span class="sl"></span></div></label>
+    <div class="sep"></div>
+    <div class="slbl" data-i18n="secVis">Visibility</div>
+    <label class="row" for="t1"><div class="rt"><div class="rl" data-i18n="lVis">Hide tab switching</div><div class="rd" data-i18n="dVis">Keeps visibilityState as visible</div></div><div class="tgl"><input type="checkbox" id="t1" data-key="blockVisibility"><span class="sl"></span></div></label>
+    <label class="row" for="t2"><div class="rt"><div class="rl" data-i18n="lFoc">Suppress focus loss</div><div class="rd" data-i18n="dFoc">Blocks blur and focusout events</div></div><div class="tgl"><input type="checkbox" id="t2" data-key="blockFocus"><span class="sl"></span></div></label>
+    <label class="row" for="t3"><div class="rt"><div class="rl" data-i18n="lBlur">Block mouse leave</div><div class="rd" data-i18n="dBlur">Drops mouseleave, mouseout, pointerleave</div></div><div class="tgl"><input type="checkbox" id="t3" data-key="blockBlur"><span class="sl"></span></div></label>
+    <div class="sep"></div>
+    <div class="slbl" data-i18n="secCon">Content</div>
+    <label class="row" for="t4"><div class="rt"><div class="rl" data-i18n="lCss">Remove blur overlays</div><div class="rd" data-i18n="dCss">Strips filter:blur and pointer-events:none</div></div><div class="tgl"><input type="checkbox" id="t4" data-key="stripCssBlur"><span class="sl"></span></div></label>
+    <label class="row" for="t5"><div class="rt"><div class="rl" data-i18n="lSel">Enable text selection</div><div class="rd" data-i18n="dSel">Overrides user-select:none globally</div></div><div class="tgl"><input type="checkbox" id="t5" data-key="restoreSelect"><span class="sl"></span></div></label>
+    <label class="row" for="t6"><div class="rt"><div class="rl" data-i18n="lScr">Unlock scroll</div><div class="rd" data-i18n="dScr">Removes overflow:hidden from html/body</div></div><div class="tgl"><input type="checkbox" id="t6" data-key="restoreScroll"><span class="sl"></span></div></label>
+    <button class="bcpy" id="btnCopy" data-i18n="tCopy">Copy question</button>
+  </div>
+  <div class="pnl" id="panelSettings">
+    <div class="slbl" data-i18n="secSet">Settings</div>
+    <div class="sr"><div><div class="sl2" data-i18n="sLng">Language</div></div>
+      <select class="lsel" id="langSel">
+        <option value="auto">Auto</option>
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+        <option value="uk">Українська</option>
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="sr"><div><div class="sl2" data-i18n="sRst">Reset to defaults</div></div><button class="brst" id="btnRst" data-i18n="sRstB">Reset</button></div>
+    <div class="sep"></div>
+    <div class="sinf"><span data-i18n="sVer">Version</span><span>2.0</span></div>
+  </div>
+  <div class="ftr">
+    <span class="fn" id="fNote" data-i18n="fNote">changes apply immediately</span>
+    <button class="bal" id="btnAll" data-i18n="bDis">disable all</button>
+  </div>
+</div>
+<script src="i18n.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
